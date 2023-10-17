@@ -2,7 +2,7 @@ import Validator from './src/Validator.js';
 
 const v = new Validator();
 const schema = v.object().shape({
-    id: v.number().odd(), // теперь, при валидации объекта с ключом id, значение этого ключа пройдет валидацию в соответствии с текущими методами
+    id: v.number().odd(),
     basket: v.array().length(3),
   });
   
