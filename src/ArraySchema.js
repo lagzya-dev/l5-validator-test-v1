@@ -3,7 +3,6 @@ class ValidArray {
     this.validators = [(data) => Array.isArray(data)];
   }
 
-  // length
   length(length) {
     this.validators.push((data) => {
       if (data.length !== length) {
