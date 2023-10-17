@@ -7,31 +7,25 @@
 */
 class NumberSchema {
     constructor() {
-        this.odd1 = false;
-        this.even1 = false;
+        this.validators = [(data) => typeof data === "number"];
     }
     //even
     even() {
-        this.even1 = true;
+        this.validators.push((data) => data % 2 === 0);
         return this
     }
     //odd
     odd() {
-        this.odd1 = true;
+        this.validators.push((data) => data % 2 !== 0);
         return this;
     }
 
     isValid(value) {
-        if (typeof value !== "number") {
-            return false;
+        for (const validator of this.validators) {
+            if (!validator(value)) {
+                return false;
+            }
         }
-        if (this.odd1 && value % 2 === 0) {
-            return false;
-        }
-        if (this.even1 && value % 2 !== 0) {
-            return false;
-        }
-
         return true;
     }
 }
