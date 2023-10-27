@@ -1,16 +1,10 @@
 class ValidArray {
-  constructor() {
-    this.validators = [(data) => Array.isArray(data)];
+  constructor(validators) {
+    this.validators = validators;
   }
 
   length(length) {
-    this.validators.push((data) => {
-      if (data.length !== length) {
-        return false;
-      }
-      return true;
-    });
-    return this;
+    return new ValidArray([...this.validators, (data) =>  data.length === length]);
   }
 
   isValid(data) {

@@ -1,18 +1,17 @@
 class ObjectSchema {
-  constructor() {
-    this.validators = [(data) => typeof data === 'object'];
+  constructor(validators) {
+    this.validators = validators;
   }
 
   shape(obj) {
-    this.validators.push((data) => {
+    return new ObjectSchema([...this.validators, (data) => {
       const keys = Object.keys(data);
       const keysSchema = Object.keys(obj);
       if (keys.length !== keysSchema.length) {
         return false;
       }
       return keys.every((key) => obj[key].isValid(data[key]));
-    });
-    return this;
+    }]);
   }
 
   isValid(obj) {

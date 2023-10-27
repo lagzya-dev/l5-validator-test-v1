@@ -1,18 +1,16 @@
 class NumberSchema {
-  constructor() {
-    this.validators = [(data) => typeof data === 'number'];
+  constructor(validators) {
+    this.validators = validators;
   }
 
   // even
   even() {
-    this.validators.push((data) => data % 2 === 0);
-    return this;
+    return new NumberSchema([...this.validators, (data) => data % 2 === 0]);
   }
 
   // odd
   odd() {
-    this.validators.push((data) => data % 2 !== 0);
-    return this;
+    return new NumberSchema([...this.validators, (data) => data % 2 !== 0]);
   }
 
   isValid(value) {
